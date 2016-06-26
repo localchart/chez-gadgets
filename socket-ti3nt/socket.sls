@@ -38,9 +38,10 @@
   
   (define-record-type socket
     (fields [mutable fd]))
-
+#|
   (define socket-guardian
     (make-guardian))
+|#
 
   (define-syntax define-dual
     (syntax-rules ()
@@ -112,7 +113,7 @@
 	 (if (< fd 0)
 	     (error 'make-client-socket "connect fail" fd)
 	     (make-socket fd)))
-       (socket-guardian sock)
+       ;(socket-guardian sock)
        sock)))
 
   (define make-server-socket
@@ -125,7 +126,7 @@
 	 (if (<= fd 0)
 	     (error 'make-server-socket "fail" fd)
 	     (make-socket fd)))
-       (socket-guardian sock)
+       ;(socket-guardian sock)
        sock)))
 
   (define (verify-fd who sock)
@@ -145,7 +146,7 @@
 	  (when (= accepted -1)
 	    (error 'socket-accept "invalid socket"))
 	  (let ([sock (make-socket accepted)])
-	    (socket-guardian sock)
+	    ;(socket-guardian sock)
 	    sock)))))
 
   (define-values (socket-send socket-send!)
